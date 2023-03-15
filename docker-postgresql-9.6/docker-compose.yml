@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+    db:
+      image: postgres:9.6
+      restart: unless-stopped
+      environment:
+        POSTGRES_DB: meetime
+        POSTGRES_USER: meetime
+        POSTGRES_PASSWORD: meetimeA321
+
+      ports:
+        - "5432:5432"
+      volumes:
+        - /bits/meetime/postgres/data:/var/lib/postgresql/data
