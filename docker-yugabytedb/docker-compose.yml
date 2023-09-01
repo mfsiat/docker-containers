@@ -1,0 +1,28 @@
+version: "3"
+services:
+  yugabyte:
+    image: yugabytedb/yugabyte
+    ports:
+      - "7000:7000"
+      - "9000:9000"
+      - "5433:5433"
+      - "9042:9042"
+      - "6379:6379"
+      - "12000-12010:12000-12010"
+    volumes:
+      - yb-data:/mnt/data
+    entrypoint:
+      - "/bin/bash"
+      - "-c"
+      - |
+        /home/hose2406101844a/yugabyte/bin/yugabyte start \
+          --daemon=false \
+          --redis_bind_address=0.0.0.0 \
+          --pgsql_bind_address=0.0.0.0 \
+          --cassandra_bind_address=0.0.0.0 \
+          --tserver_flags="\
+            --rpc_bind_addresses 0.0.0.0 \
+            --webserver_interface 0.0.0.0 \
+            --ysql_pg_conf /home/yugabyte/yugabyte-tserver/conf/ysql_pg_conf.conf"
+volumes:
+  yb-data:
