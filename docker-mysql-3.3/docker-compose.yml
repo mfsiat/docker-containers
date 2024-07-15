@@ -1,18 +1,20 @@
-version: '3.3'
+version: "3.9"
+
 services:
-  db:
-    image: mysql:8
+  mysql:
+    image: mysql:5.6
+    container_name: mysql56
     restart: always
     environment:
-      MYSQL_DATABASE: 'db'
-      MYSQL_USER: 'test_user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: u53u53T847;eT8
+      MYSQL_DATABASE: database
+      MYSQL_USER: sazzad_1027
+      MYSQL_PASSWORD: u53u53T847;eT8
     ports:
-      - '3306:3306'
-    expose:
-      - '3306'
+      - "3306:3306"
     volumes:
-      - /my-db:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
+
 volumes:
-  my-db:
+  mysql_data:
+    driver: local
