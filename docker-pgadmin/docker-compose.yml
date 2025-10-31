@@ -1,0 +1,21 @@
+services:
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4
+    restart: unless-stopped
+    ports:
+      - "5050:80"              # browse at http://<host>:5050
+    environment:
+      PGADMIN_DEFAULT_EMAIL: bits@bracits.com
+      PGADMIN_DEFAULT_PASSWORD: ChangeMe123!
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "True"
+      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: "10"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+      PGADMIN_LISTEN_PORT: "80"
+    volumes:
+      - ~/data/db_back/pgadmin-data:/var/lib/pgadmin
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost/misc/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
